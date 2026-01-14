@@ -12,7 +12,7 @@ const connectToDb = async () => {
         const connection = await mongoose.connect(process.env.DR_URL);
 
 
-        console.log("✅ Mongoose connection success", connection.connection.host);
+        console.log("✅  Mongoose connection success", connection.connection.host);
         process.exit(0);
     } catch (error) {
         console.log("❌ Mongoose connection error", error);

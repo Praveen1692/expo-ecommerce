@@ -1,8 +1,16 @@
 import React from 'react'
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react"
 
 function App() {
   return (
-    <div>App</div>
+    <div>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+    </div>
   )
 }
 

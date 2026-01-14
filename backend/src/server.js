@@ -6,7 +6,7 @@ import { clerkMiddleware } from "@clerk/express";
 dotenv.config();
 
 const app = express();
-app.use(clerkMiddleware());
+app.use(clerkMiddleware());  // add clerk middleware object under the req => req.auth
 
 
 connectToDb();
