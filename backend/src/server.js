@@ -29,10 +29,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "dist")));
 
-app.get("*", (req, res) => {
+// ✅ FIXED SPA fallback (Node 22 compatible)
+app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
-
 
 
 app.get("/api/health", (req, res) => {
