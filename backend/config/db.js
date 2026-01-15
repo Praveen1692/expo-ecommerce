@@ -13,10 +13,10 @@ export const connectToDb = async () => {
 
 
         console.log("✅  Mongoose connection success", connection.connection.host);
-        process.exit(0);
+
     } catch (error) {
         console.log("❌ Mongoose connection error", error);
-        process.exit(1);
+
 
     }
 }
