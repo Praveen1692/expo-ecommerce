@@ -1,10 +1,10 @@
 import express from "express";
 import path from "path";
-import connectToDb from "../config/db.js";
+import { connectToDb } from "../config/db.js";
 import dotenv from "dotenv";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
-import { functions, inngest } from "./config/inngest.js"
+import { functions, inngest } from "../config/inngest.js"
 dotenv.config();
 
 const app = express();

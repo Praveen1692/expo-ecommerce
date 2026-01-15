@@ -7,7 +7,7 @@ if (!process.env.DR_URL) {
 }
 
 
-const connectToDb = async () => {
+export const connectToDb = async () => {
     try {
         const connection = await mongoose.connect(process.env.DR_URL);
 
@@ -21,4 +21,4 @@ const connectToDb = async () => {
     }
 }
 
-export default connectToDb;
+
