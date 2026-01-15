@@ -8,6 +8,7 @@ import { functions, inngest } from "../config/inngest.js"
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
 app.use(clerkMiddleware());  // add clerk middleware object under the req => req.auth
@@ -31,6 +32,6 @@ app.get("api/health", (req, res) => {
     res.status(200).json({ message: "ok", status: 200, data: {} });
 })
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
