@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import { functions, inngest } from "../config/inngest.js"
+import adminRoutes from "../routes/admin.routes.js"
 dotenv.config();
 
 const app = express();
@@ -34,6 +35,8 @@ app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
+
+app.use("/api/admin", adminRoutes)
 
 app.get("/api/health", (req, res) => {
     res.status(200).json({ message: "ok", status: 200, data: {} });
