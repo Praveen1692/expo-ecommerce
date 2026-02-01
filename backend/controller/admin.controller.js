@@ -1,6 +1,7 @@
 import cloudinary from "../config/cloudinary.js"
 import { Product } from "../models/product.model.js";
 import { Order } from "../models/order.model.js";
+import { User } from "@clerk/express";
 
 export async function createProduct(req, res) {
     try {
@@ -113,6 +114,72 @@ export async function getAllOrders(req, res) {
 
         console.log(error);
         return res.status(500).json({ message: error.message, status: 500, data: {} });
+
+    }
+
+}
+
+
+
+export async function updateOrderStatus(req, res) {
+
+    try {
+
+        const { orderId } = req.params;
+        const { status } = req.body;
+
+        if (!orderId || !status) {
+            return res.status(400).json({ message: "All fields are required", status: 400, data: {} })
+        }
+
+
+        if (!["pending", "shipped", "cancelled"].includes(status)) {
+            return res.status(400).json({ message: "Invalid status", status: 400, data: {} })
+        }
+
+        const order = await Order.find(orderId);
+
+        if (!order) {
+            return res.status(404).json({ message: "Order not found", status: 404, data: {} })
+        }
+
+        order.status = status;
+
+        await order.save();
+
+        console.log("Order updated successfully", order);
+
+        return res.status(200).json({ message: "Order updated successfully", status: 200, data: order });
+
+
+
+
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message, status: 500, data: {} })
+
+    }
+
+}
+
+
+
+export async function getAllCustomer(req, res) {
+
+    try {
+
+        const cutomer = await User.find();
+        if (!cutomer) {
+            return res.status(404).json({ message: "Customers not found", status: 404, data: {} })
+        }
+        console.log("Show All Customers", cutomer);
+        return res.status(200).json({ message: "Customers fetched successfully", status: 200, data: cutomer });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message, status: 500, data: {} })
 
     }
 
