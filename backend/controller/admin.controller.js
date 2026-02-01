@@ -1,5 +1,6 @@
 import cloudinary from "../config/cloudinary.js"
 import { Product } from "../models/product.model.js";
+import { Order } from "../models/order.model.js";
 
 export async function createProduct(req, res) {
     try {
@@ -102,3 +103,17 @@ export async function updateProduct(req, res) {
 }
 
 
+export async function getAllOrders(req, res) {
+    try {
+        const order = await Order.find().populate("user", "name email").populate("orderItems.product");
+        console.log("Show All Orders", order);
+        return res.status(200).json({ message: "Orders fetched successfully", status: 200, data: order });
+
+    } catch (error) {
+
+        console.log(error);
+        return res.status(500).json({ message: error.message, status: 500, data: {} });
+
+    }
+
+}
