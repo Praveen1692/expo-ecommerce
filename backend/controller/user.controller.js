@@ -20,21 +20,7 @@ export async function addAddress(req, res) {
 
         const { addressLine1, addressLine2, city, state, pincode, country } = req.body;
 
-        if (!addressLine1 || !addressLine2 || !city || !state || !pincode || !country) {
-            return res.status(400).json({ message: "All fields are required", status: 400, data: {} })
-        }
-
-        const address = {
-            addressLine1,
-            addressLine2,
-            city,
-            state,
-            pincode,
-            country
-        }
-
-        userr.address.push(address);
-        await userr.save();
+        
 
         return res.status(200).json({ message: "Address added successfully", status: 200, data: {} })
 
